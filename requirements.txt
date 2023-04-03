@@ -1,0 +1,9 @@
+pandas
+jieba
+numpy
+gensim
+fasttext
+matplotlib
+torch
+scikit-learn
+torchmetrics
