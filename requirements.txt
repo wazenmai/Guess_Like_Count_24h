@@ -7,3 +7,4 @@ matplotlib
 torch
 scikit-learn
 torchmetrics
+chinese_converter

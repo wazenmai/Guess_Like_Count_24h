@@ -1,0 +1,11 @@
+checkpoint
+dataset
+Hope.ipynb
+log*
+guess_env
+*.bin
+*.gz
+.ipynb_checkpoints/
+__pycache__
+*.csv
+*.pkl

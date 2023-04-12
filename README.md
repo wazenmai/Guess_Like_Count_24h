@@ -1,43 +1,51 @@
+# Guess Like Count After 24 hr
 
-```
-# Construct model
-model = nn.Sequential(
-    nn.Linear(data_dim, 500),
-    nn.ReLU(),
-    nn.Linear(500, 100),
-    nn.ReLU(),
-    nn.Linear(100, 10),
-    nn.ReLU(),
-    nn.Linear(10, 1)
-)
-```
-- included all information: model can not be trained
-- drop created_at, author_id, forum_id: 
-    - public_test_loss:  0.3128125036478043
-- drop author_id, forum_id: public_test_loss: 
-    - weekday as one-hot, period as one hot
-    - public_test_loss:  0.30869804294109343
-- add forum mean and author mean:
-    - include one-hot created_at
-    - not include author_id and forum_id
-    - public_test_loss: 0.4030624141216278
-- add forum mean and drop author_id:
-    - public_test_loss: 0.30803462636470796
+## Train the model
+You can also tune the model by setting various parameter.
+- `normalization`
+- `regularize`
+- `epoch`
+- `batch_size`
 
+If you don't want to use normalization, just don't add it to argument.
 ```
-model = nn.Sequential(
-    nn.Linear(data_dim, 512),
-    nn.ReLU(),
-    nn.Linear(512, 1024),
-    nn.ReLU(),
-    nn.Linear(1024, 256),
-    nn.ReLU(),
-    nn.Linear(256, 1)
-)
-1. add forum mean and drop author_id:
-    - loss:  0.3053166998147964
-2. drop forum, author, created_at:
-    - loss:  0.3110107444524765
-3. drop forum and author id:
-    - loss:  0.3073045672655106
-    
+python3 main.py --normalization {normalization_method} --output {output_name.pkl}
+```
+Here I save the `best_loss`, `best_weights`, `train_losses`, `eval_losses` in output (pkl file).
+
+## Evaluate the model
+```
+python3 evaluate.py --normalization {normalization_method} --ckpt {checkpoint_name.pkl}
+```
+
+## Generate Prediction (result.csv)
+```
+python3 predict.py --normalization {normalization_method} --ckpt {checkpoint_name.pkl}
+```
+
+---
+
+# Other Notes
+
+## Download FastText Model
+
+Please run `download.py` or run below code.
+```
+import fasttext.util
+fasttext.util.download_model('zh', if_exists='ignore')
+```
+
+## Data Analysis
+For dataset analysis, please see `Analysis.ipynb` for more details. It also include the training curve and the information about fasttext chinese embedding.
+I include following analysis in the code.
+1. Numerial Analysis
+2. Relationship between Created Time and Like Count
+3. Like Count Analysis
+4. Comment Count Analysis
+5. Relationship between Like Count and Comment Count
+6. Hot Topic Analysis
+
+## Feature Importance
+```
+python3 feature_importance.py --ckpt {checkpoint_name.pkl}
+```
