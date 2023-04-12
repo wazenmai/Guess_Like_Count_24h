@@ -13,6 +13,8 @@ python3 main.py --normalization {normalization_method} --output {output_name.pkl
 ```
 Here I save the `best_loss`, `best_weights`, `train_losses`, `eval_losses` in output (pkl file).
 
+Note: If you failed to run the code, please check whether you download `cc.zh.300.bin`.
+
 ## Evaluate the model
 ```
 python3 evaluate.py --normalization {normalization_method} --ckpt {checkpoint_name.pkl}
@@ -22,6 +24,8 @@ python3 evaluate.py --normalization {normalization_method} --ckpt {checkpoint_na
 ```
 python3 predict.py --normalization {normalization_method} --ckpt {checkpoint_name.pkl}
 ```
+
+For the best model checkpoint, please download from https://github.com/wazenmai/Guess_Like_Count_24h/blob/main/best_model.pkl
 
 ---
 
